@@ -1,4 +1,9 @@
+from basilisk_mockup.main import compute
+
+
 def test_simple():
-    x=1
-    assert x==1
+    x=3
+    y=4
+    z=compute(x,y)
+    assert z==x+y
     

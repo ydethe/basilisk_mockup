@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Setup pdm
-        uses: pdm-project/setup-pdm@v3
+        uses: pdm-project/setup-pdm
         with:
           python-version: ${{ matrix.python-version }}
           enable-pep582: false

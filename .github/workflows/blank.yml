@@ -28,16 +28,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Set up pdm with Python ${{ matrix.python-version }}
+      - name: Setup pdm
         uses: pdm-project/setup-pdm@v3
         with:
           python-version: ${{ matrix.python-version }}
           cache: true
           
       - name: Install dependencies
-        run: |
-          pdm install
-          
-      - name: Test with pytest
+        run: pdm install
+        
+      - name: Running tests
         run: pdm run pytest
           

@@ -38,5 +38,7 @@ jobs:
         run: pdm install
         
       - name: Running tests
-        run: pdm run pytest
+        run: |
+          pdm run python --version
+          pdm run pytest
           

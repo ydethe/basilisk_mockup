@@ -38,4 +38,6 @@ jobs:
         run: pdm sync -d -G test
         
       - name: Run Tests
-        run: pdm run pytest
+        run: |
+          which python
+          pdm run pytest

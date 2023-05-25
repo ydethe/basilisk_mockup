@@ -36,7 +36,6 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pdm use .venv/bin/python
           pdm install
           
       - name: Test with pytest

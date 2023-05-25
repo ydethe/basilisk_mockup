@@ -35,10 +35,7 @@ jobs:
           cache: true
           
       - name: Install dependencies
-        run: pdm install
+        run: pdm sync -d -G testing
         
-      - name: Running tests
-        run: |
-          pdm run python --version
-          pdm run pytest
-          
+      - name: Run Tests
+        run: pdm run pytest

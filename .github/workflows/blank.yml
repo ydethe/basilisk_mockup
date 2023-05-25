@@ -32,6 +32,7 @@ jobs:
         uses: pdm-project/setup-pdm@v3
         with:
           python-version: ${{ matrix.python-version }}
+          enable-pep582: false
           
       - name: Install dependencies
         run: pdm sync -d -G test

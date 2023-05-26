@@ -114,12 +114,13 @@ jobs:
         shell: pwsh
         run: |
           venv\Scripts\activate
+          python3 --version
           # python conanfile.py
           python build_wheel.py
           Import-Module "$env:ChocolateyInstall/helpers/chocolateyInstaller.psm1"
           refreshenv
           python build_wheel.py -n > temp.txt
-          set /p $env:WHL_NAME=<temp.txt
+          $env:WHL_NAME += (Get-Content temp.txt)
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:

@@ -11,7 +11,7 @@ on:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  # workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,16 +27,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
+
       - name: Setup pdm
         uses: pdm-project/setup-pdm@v2
         with:
           python-version: ${{ matrix.python-version }}
           enable-pep582: false
-          
+
       - name: Install dependencies
         run: pdm sync -d -G test
-        
+
       - name: Run Tests
         run: |
           which python

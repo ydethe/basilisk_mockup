@@ -58,10 +58,10 @@ jobs:
       - name: "Build basilisk"
         run: |
           source .venv/bin/activate
-          python3 --version
-          # python3 conanfile.py
-          python3 build_wheel.py
-          echo "WHL_NAME=$(python3 build_wheel.py -n)" >> $GITHUB_ENV
+          python --version
+          # python conanfile.py
+          python build_wheel.py
+          echo "WHL_NAME=$(python build_wheel.py -n)" >> $GITHUB_ENV
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:
@@ -114,7 +114,7 @@ jobs:
         shell: pwsh
         run: |
           venv\Scripts\activate.ps1
-          python3 --version
+          python --version
           # python conanfile.py
           python build_wheel.py
           Import-Module "$env:ChocolateyInstall/helpers/chocolateyInstaller.psm1"

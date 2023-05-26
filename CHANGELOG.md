@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Fixed env var ([de44fce](https://github.com/ydethe/basilisk_mockup/commit/de44fce85b7f01f10d68b0bda5f5917d48538ff1) by YANN BLAUDIN DE THE).
 - Fixed pdm.lock ([d65ad14](https://github.com/ydethe/basilisk_mockup/commit/d65ad148386638107b14de4b142f8d324748cb55) by Yann de The).
 - Fixed python3.7 reqs ([931ca32](https://github.com/ydethe/basilisk_mockup/commit/931ca32d3331813d69c8546f7d6429be59b62116) by Yann BLAUDIN DE THE).
 - Fixed coverage ([1e014b6](https://github.com/ydethe/basilisk_mockup/commit/1e014b6474d959104082856c643b965304665eff) by Yann BLAUDIN DE THE).

@@ -117,7 +117,7 @@ jobs:
           ./venv/Scripts/activate.ps1 &&
           # python3 conanfile.py &&
           python3 build_wheel.py &&
-          python3 build_wheel.py -n > temp.txt &&
+          python3 build_wheel.py -n > temp.txt
           $env:WHL_NAME += (Get-Content temp.txt)
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3

@@ -50,7 +50,7 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-pip-
       - name: "Install linux packages"
-        run: sudo apt-get update && sudo apt-get install build-essential swig cmake python3-setuptools python3-tk python3.9-venv -y
+        run: sudo apt-get update && sudo apt-get install build-essential swig cmake python3-tk python3.9-venv -y
       - name: "Create virtual Environment"
         run: python${{ matrix.python-version }} -m venv .venv
       - name: "Install python packages"
@@ -103,7 +103,7 @@ jobs:
         shell: pwsh
         run: |
             venv\Scripts\activate
-            pip install wheel conan==1.59.0 parse six pytest-xdist
+            pip install wheel conan==1.59.0 parse six pytest-xdist setuptools
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
         run: |
@@ -116,6 +116,15 @@ jobs:
           venv\Scripts\activate
           # python conanfile.py
           python build_wheel.py
+          Import-Module "$env:ChocolateyInstall/helpers/chocolateyInstaller.psm1"
+          refreshenv
+          python build_wheel.py -n > temp.txt
+          set /p $env:WHL_NAME=<temp.txt
+      - name: "Upload python wheel"
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.WHL_NAME }}
+          path: ${{ env.WHL_NAME }}
       # - name: "Test Simulation Python"
       #   shell: pwsh
       #   run: |

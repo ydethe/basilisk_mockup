@@ -102,7 +102,7 @@ jobs:
       - name: "Install wheel and conan package"
         shell: pwsh
         run: |
-            venv\Scripts\activate
+            venv\Scripts\activate.ps1
             pip install wheel conan==1.59.0 parse six pytest-xdist setuptools
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
@@ -113,7 +113,7 @@ jobs:
       - name: "Build basilisk"
         shell: pwsh
         run: |
-          venv\Scripts\activate
+          venv\Scripts\activate.ps1
           python3 --version
           # python conanfile.py
           python build_wheel.py
@@ -126,27 +126,3 @@ jobs:
         with:
           name: ${{ env.WHL_NAME }}
           path: ${{ env.WHL_NAME }}
-      # - name: "Test Simulation Python"
-      #   shell: pwsh
-      #   run: |
-      #     Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name MPLBACKEND -Value ${MPLBACKEND}
-      #     venv\Scripts\activate
-      #     cd src\simulation
-      #     (Get-ChildItem -Directory).FullName | ForEach-Object { cd $_; pytest -n 2 -m "not scenarioTest"; if(($LastExitCode -ne 0) -and ($LastExitCode -ne 5)) {exit 1}}
-      # - name: "Python Architecture Tests"
-      #   shell: pwsh
-      #   run: |
-      #     venv\Scripts\activate
-      #     cd src\architecture
-      #     (Get-ChildItem -Directory).FullName | ForEach-Object { cd $_; pytest -n 2; if(($LastExitCode -ne 0) -and ($LastExitCode -ne 5)) {exit 1}}
-      # - name: "Python FswAlgorithms Tests"
-      #   shell: pwsh
-      #   run: |
-      #     venv\Scripts\activate
-      #     cd src\fswAlgorithms
-      #     (Get-ChildItem -Directory).FullName | ForEach-Object { cd $_; pytest -n 2; if(($LastExitCode -ne 0) -and ($LastExitCode -ne 5)) {exit 1}}
-      # - name: "C/C++ Tests"
-      #   shell: pwsh
-      #   run: |
-      #     cd dist3
-      #     (Get-ChildItem -Directory).FullName | ForEach-Object { ctest --gtest_output "json:../ctest/ctest-results-windows-${{ matrix.python-version }}.json"; if(($LastExitCode -ne 0) -and ($LastExitCode -ne 5)) {exit 1}}

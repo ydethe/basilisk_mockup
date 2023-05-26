@@ -1,2 +1,5 @@
-def compute(x: int | float, y: int | float) -> int | float:
+from typing import Union
+
+
+def compute(x: Union[ int, float], y: Union[ int, float]) -> Union[ int, float]:
     return x + y

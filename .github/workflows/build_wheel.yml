@@ -103,22 +103,21 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          python3 --version &&
-          pip3 install wheel conan==1.59.0 parse six pytest-xdist setuptools
+          pip3 install wheel conan==1.59.0 parse six pytest-xdist setuptools &&
+          python3 build_wheel.py -n > wheel_name.txt
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
         run: |
           $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
           $newpath = “$oldpath;${{ env.GITHUB_WORKSPACE }}\dist3\Basilisk;C:\Program Files\CMake\bin”
           Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
+          $env:WHL_NAME += (Get-Content wheel_name.txt)
       - name: "Build basilisk"
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
           # python3 conanfile.py &&
-          python3 build_wheel.py &&
-          python3 build_wheel.py -n > temp.txt
-          $env:WHL_NAME += (Get-Content temp.txt)
+          python3 build_wheel.py
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:

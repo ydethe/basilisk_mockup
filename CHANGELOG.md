@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added -n option to build_wheel.py ([9e4e697](https://github.com/ydethe/basilisk_mockup/commit/9e4e697237e36094b6fc19d5eef37a486eecbaa5) by Yann BLAUDIN DE THE).
 - Added CI badge ([f3338fc](https://github.com/ydethe/basilisk_mockup/commit/f3338fc0b713294cf5589270baa6c66b8eb93da8) by Yann de The).
 - Added pdm fix ([9c41b02](https://github.com/ydethe/basilisk_mockup/commit/9c41b02b94a0d5d97f532b4a3bed585e389e1cbc) by Yann de The).
 - Added pdm.lock ([588bab6](https://github.com/ydethe/basilisk_mockup/commit/588bab61d74bafef2770745a1b3e66275b0eac0d) by Yann de The).

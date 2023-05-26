@@ -98,15 +98,17 @@ jobs:
       #   run: choco install swig cmake -y
       - name: "Create python virtual env"
         shell: pwsh
-        run: python${{ matrix.python-version }} -m venv venv
+        run: |
+          (Get-Command python3).Path
+          python3 -m venv venv
       - name: "Install wheel and conan package"
         shell: pwsh
         run: |
           ./venv/Scripts/activate.ps1
-          python --version
-          (Get-Command python).Path
-          (Get-Command pip).Path
-          pip install wheel conan==1.59.0 parse six pytest-xdist setuptools
+          python3 --version
+          (Get-Command python3).Path
+          (Get-Command pip3).Path
+          pip3 install wheel conan==1.59.0 parse six pytest-xdist setuptools
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
         run: |
@@ -117,11 +119,11 @@ jobs:
         shell: pwsh
         run: |
           ./venv/Scripts/activate.ps1
-          # python conanfile.py
-          python build_wheel.py
+          # python3 conanfile.py
+          python3 build_wheel.py
           Import-Module "$env:ChocolateyInstall/helpers/chocolateyInstaller.psm1"
           refreshenv
-          python build_wheel.py -n > temp.txt
+          python3 build_wheel.py -n > temp.txt
           $env:WHL_NAME += (Get-Content temp.txt)
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3

@@ -102,8 +102,8 @@ jobs:
       - name: "Install wheel and conan package"
         shell: pwsh
         run: >
-          ./venv/Scripts/activate.ps1 && \
-          python3 --version && \
+          ./venv/Scripts/activate.ps1 &&
+          python3 --version &&
           pip3 install wheel conan==1.59.0 parse six pytest-xdist setuptools
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
@@ -114,10 +114,10 @@ jobs:
       - name: "Build basilisk"
         shell: pwsh
         run: >
-          ./venv/Scripts/activate.ps1 && \
-          # python3 conanfile.py && \
-          python3 build_wheel.py && \
-          python3 build_wheel.py -n > temp.txt && \
+          ./venv/Scripts/activate.ps1 &&
+          # python3 conanfile.py &&
+          python3 build_wheel.py &&
+          python3 build_wheel.py -n > temp.txt &&
           $env:WHL_NAME += (Get-Content temp.txt)
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3

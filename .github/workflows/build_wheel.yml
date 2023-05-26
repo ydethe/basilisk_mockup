@@ -116,7 +116,6 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          # python3 conanfile.py &&
           python3 build_wheel.py
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3

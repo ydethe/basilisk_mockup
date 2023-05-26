@@ -33,10 +33,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           enable-pep582: false
-        run: pdm fix
 
       - name: Install dependencies
-        run: pdm sync -d -G test
+        run: |
+          pdm fix
+          pdm sync -d -G test
 
       - name: Run Tests
         run: |

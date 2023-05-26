@@ -10,7 +10,7 @@ authors = [
     { name = "Yann BLAUDIN DE THE", email = "ydethe@gmail.com" },
 ]
 keywords = [
-    
+
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -21,9 +21,9 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-
+    "importlib_metadata; python_version < '3.8'",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.7.2"
 
 [project.urls]
 "Bug Tracker" = "https://github.com/ydethe/basilisk_mockup/issues"

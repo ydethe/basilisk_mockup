@@ -1,15 +1,15 @@
 .eggs/
+*.egg
+*.whl
+qtest.py
+tmp/*
 CMakeFiles/
 **/_VizFiles/
 CMakeCache.txt
 .DS_Store
 dist/
 dist3/
-build/
-.coverage
-htmldoc/
-
-.pytest_cache 
+.pytest_cache
 docs/html
 docs/build
 docs/source/Documentation/*
@@ -53,4 +53,3 @@ src/moduleTemplates/autoCppModule/*
 **/__pycache__/
 venv/
 .venv/
-.pdm-python

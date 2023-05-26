@@ -85,6 +85,7 @@ dev = [
     "ipython>=7.23.1",
     "pre-commit",
     "snakeviz>=2.1.2",
+    "wheel>=0.40.0",
 ]
 maintain = [
     "black==22.3.0",

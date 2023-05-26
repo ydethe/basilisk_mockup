@@ -52,12 +52,13 @@ jobs:
       - name: "Install linux packages"
         run: sudo apt-get update && sudo apt-get install build-essential swig cmake python3-setuptools python3-tk python3.9-venv -y
       - name: "Create virtual Environment"
-        run: python3 -m venv .venv
+        run: python${{ matrix.python-version }} -m venv .venv
       - name: "Install python packages"
         run: source .venv/bin/activate && pip3 install wheel conan==1.59.0 pytest datashader holoviews pytest-xdist setuptools
       - name: "Build basilisk"
         run: |
           source .venv/bin/activate
+          python3 --version
           # python3 conanfile.py
           python3 build_wheel.py
           echo "WHL_NAME=$(python3 build_wheel.py -n)" >> $GITHUB_ENV

@@ -12,11 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added CI badge ([f3338fc](https://github.com/ydethe/basilisk_mockup/commit/f3338fc0b713294cf5589270baa6c66b8eb93da8) by Yann de The).
+- Added pdm fix ([9c41b02](https://github.com/ydethe/basilisk_mockup/commit/9c41b02b94a0d5d97f532b4a3bed585e389e1cbc) by Yann de The).
 - Added pdm.lock ([588bab6](https://github.com/ydethe/basilisk_mockup/commit/588bab61d74bafef2770745a1b3e66275b0eac0d) by Yann de The).
 - Added README ([0b488ad](https://github.com/ydethe/basilisk_mockup/commit/0b488ad8d2a572a4432b6b91af1f7234d07414d8) by Yann BLAUDIN DE THE).
 
 ### Fixed
 
+- Fixed pdm.lock ([d65ad14](https://github.com/ydethe/basilisk_mockup/commit/d65ad148386638107b14de4b142f8d324748cb55) by Yann de The).
 - Fixed python3.7 reqs ([931ca32](https://github.com/ydethe/basilisk_mockup/commit/931ca32d3331813d69c8546f7d6429be59b62116) by Yann BLAUDIN DE THE).
 - Fixed coverage ([1e014b6](https://github.com/ydethe/basilisk_mockup/commit/1e014b6474d959104082856c643b965304665eff) by Yann BLAUDIN DE THE).
 

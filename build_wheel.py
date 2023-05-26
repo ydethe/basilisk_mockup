@@ -1,5 +1,6 @@
 # build_wheel.py
 
+import argparse
 import platform
 import os
 from pathlib import Path
@@ -114,5 +115,16 @@ def build():
         whl.rename(whl_name)
 
 
+def main():
+    parser = argparse.ArgumentParser("Wheel creation script")
+    parser.add_argument("-n", "--name", help="Only print the wheel's name", action="store_true")
+    args = parser.parse_args()
+
+    if args.name:
+        print(get_basilik_wheel_name())
+    else:
+        build()
+
+
 if __name__ == "__main__":
-    build()
+    main()

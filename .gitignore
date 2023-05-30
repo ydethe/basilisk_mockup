@@ -8,7 +8,6 @@ CMakeFiles/
 CMakeCache.txt
 .DS_Store
 dist/
-dist3/
 .pytest_cache
 docs/html
 docs/build

@@ -52,9 +52,6 @@ legacy_tox_ini = """
 """
 
 [tool.pytest.ini_options]
-addopts = [
-    "--junitxml=htmldoc/junit.xml",
-]
 testpaths = [
     "tests/",
 ]

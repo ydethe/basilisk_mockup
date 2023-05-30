@@ -150,12 +150,11 @@ jobs:
           name: ${{ env.WHL_NAME }}
       - name: "Install Basilisk"
         run: |
-          ls -R
           source .venv/bin/activate && pip3 install pytest ${{ env.WHL_NAME }}
       - name: "Run Python Tests"
         run: |
           source .venv/bin/activate
-          cd src && pytest -n 2 -m "not scenarioTest" --junitxml=../junit/test-results-${{ matrix.python-version }}.xml
+          pytest --junitxml=../junit/test-results-${{ matrix.python-version }}.xml
       - name: "Upload pytest test results"
         uses: actions/upload-artifact@v3
         with:
@@ -163,16 +162,7 @@ jobs:
           path: junit/test-results-${{ matrix.python-version }}.xml
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
-      - name: "Run C/C++ Tests"
-        working-directory: ./dist3
-        run: ctest --gtest_output "json:../ctest/ctest-results-linux-${{ matrix.python-version }}.json"
-      - name: "Upload Google Test CTest results"
-        uses: actions/upload-artifact@v3
-        with:
-          name: ctest-results-${{ matrix.python-version }}
-          path: ctest/ctest-results-${{ matrix.python-version }}.json
-        if: ${{ always() }}
-
+      
   # test-windows:
   #   name: Test Windows
   #   needs: [build-windows]

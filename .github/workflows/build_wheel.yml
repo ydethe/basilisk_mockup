@@ -2,10 +2,10 @@ name: "Build wheel"
 
 on:
   push:
-    # # Pattern matched against refs/tags
-    # tags:
+    # Pattern matched against refs/tags
+    # tags:        
     #   - '*'           # Push events to every tag not containing /
-
+    
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -28,38 +28,37 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      # - name: Cache conan packages
-      #   id: cache-conan
-      #   uses: actions/cache@v3
-      #   env:
-      #     cache-name: cache-conan-packages
-      #   with:
-      #     # conan cache files are stored in `~/.conan` on Linux/macOS
-      #     path: ~/.conan
-      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('conanfile.py') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-build-${{ env.cache-name }}-
-      # - name: Cache pip modules
-      #   id: cache-pip
-      #   uses: actions/cache@v3
-      #   env:
-      #     cache-name: cache-pip-modules
-      #   with:
-      #     path: ~/.cache/pip
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-
+      - name: Cache conan packages
+        id: cache-conan
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-conan-packages
+        with:
+          # conan cache files are stored in `~/.conan` on Linux/macOS
+          path: ~/.conan
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('conanfile.py') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Cache pip modules
+        id: cache-pip
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-pip-modules
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: "Install linux packages"
         run: sudo apt-get update && sudo apt-get install build-essential swig cmake python3-tk python3.9-venv -y
       - name: "Create virtual Environment"
-        run: python${{ matrix.python-version }} -m venv .venv
+        run: python3 -m venv .venv
       - name: "Install python packages"
-        run: source .venv/bin/activate && pip3 install wheel conan==1.59.0 pytest datashader holoviews pytest-xdist setuptools
+        run: source .venv/bin/activate && pip3 install wheel "conan==1.59.0" pytest pytest-xdist setuptools
       - name: "Build basilisk"
         run: |
           source .venv/bin/activate
-          python --version
-          # python conanfile.py
+          python conanfile.py
           python build_wheel.py
           echo "WHL_NAME=$(python build_wheel.py -n)" >> $GITHUB_ENV
       - name: "Upload python wheel"
@@ -90,22 +89,22 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
           cache-dependency-path: '**/bskPkgRequired.txt'
-      # - name: Choco help
-      #   uses: crazy-max/ghaction-chocolatey@v2
-      #   with:
-      #     args: -h
-      # - name: "Install swig and cmake"
-      #   shell: pwsh
-      #   run: choco install swig cmake -y
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v2
+        with:
+          args: -h
+      - name: "Install swig and cmake"
+        shell: pwsh
+        run: choco install swig cmake -y
       - name: "Create python virtual env"
         shell: pwsh
-        run: python3 -m venv venv
+        run: python -m venv venv
       - name: "Install wheel and conan package"
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
           pip3 install wheel conan==1.59.0 parse six pytest-xdist setuptools &&
-          python3 build_wheel.py -n > wheel_name.txt
+          python build_wheel.py -n > wheel_name.txt
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
         run: |
@@ -118,9 +117,11 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          python3 build_wheel.py
+          python conanfile.py &&
+          python build_wheel.py
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.WHL_NAME }}
           path: ${{ env.WHL_NAME }}
+          

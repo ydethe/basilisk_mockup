@@ -1,4 +1,4 @@
-name: "Build wheel"
+name: "Build and test"
 
 on: push
 
@@ -47,7 +47,7 @@ jobs:
       - name: "Create virtual Environment"
         run: python3 -m venv .venv
       - name: "Install python packages"
-        run: source .venv/bin/activate && pip3 install wheel "conan==1.59.0" pytest pytest-xdist setuptools
+        run: source .venv/bin/activate && pip3 install wheel setuptools
       - name: "Build basilisk"
         run: |
           source .venv/bin/activate
@@ -144,13 +144,13 @@ jobs:
           python3 -m venv .venv
           source .venv/bin/activate && pip3 install wheel
           echo "WHL_NAME=$(python build_wheel.py -n)" >> $GITHUB_ENV
-      - name: Download wheel
+      - name: "Download wheel"
         uses: actions/download-artifact@master
         with:
           name: ${{ env.WHL_NAME }}
-          path: ${{ env.WHL_NAME }}
       - name: "Install Basilisk"
         run: |
+          ls -R
           source .venv/bin/activate && pip3 install ${{ env.WHL_NAME }}
       - name: "Run Python Tests"
         run: |

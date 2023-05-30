@@ -47,7 +47,7 @@ jobs:
       - name: "Create virtual Environment"
         run: python3 -m venv .venv
       - name: "Install python packages"
-        run: source .venv/bin/activate && pip3 install wheel setuptools
+        run: source .venv/bin/activate && pip3 install wheel pytest setuptools
       - name: "Build basilisk"
         run: |
           source .venv/bin/activate
@@ -151,7 +151,7 @@ jobs:
       - name: "Install Basilisk"
         run: |
           ls -R
-          source .venv/bin/activate && pip3 install ${{ env.WHL_NAME }}
+          source .venv/bin/activate && pip3 install pytest ${{ env.WHL_NAME }}
       - name: "Run Python Tests"
         run: |
           source .venv/bin/activate

@@ -1,4 +1,4 @@
-from basilisk_mockup.main import compute
+from Basilisk.main import compute
 
 
 def test_simple():

@@ -22,15 +22,6 @@ classifiers = [
 ]
 dependencies = [
     "importlib_metadata; python_version < '3.8'",
-    "matplotlib",
-    "nump",
-    "pillow",
-    "pandas",
-    "holoviews",
-    "datashader",
-    "colorama",
-    "tqdm",
-    "pytest",
 ]
 requires-python = ">=3.7.2"
 
@@ -62,13 +53,7 @@ legacy_tox_ini = """
 
 [tool.pytest.ini_options]
 addopts = [
-    "--import-mode=importlib",
-    "--html=htmldoc/tests/report.html",
-    "--self-contained-html",
     "--junitxml=htmldoc/junit.xml",
-    "--cov-config=tests/coverage.conf",
-    "--cov=basilisk_mockup",
-    "--doctest-modules",
 ]
 testpaths = [
     "tests/",

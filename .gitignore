@@ -1,3 +1,9 @@
+.pdm-python
+.venv*/
+build/
+dist3/Basilisk/main.py
+htmldoc/
+pdm.lock
 .eggs/
 *.egg
 *.whl

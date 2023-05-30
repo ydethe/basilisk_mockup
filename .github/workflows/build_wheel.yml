@@ -182,7 +182,7 @@ jobs:
           name: ${{ env.WHL_NAME }}
       - name: "Install Basilisk"
         run: |
-          ./venv/Scripts/activate.ps1 && && pip3 install pytest ${{ env.WHL_NAME }}
+          ./venv/Scripts/activate.ps1 && pip3 install pytest ${{ env.WHL_NAME }}
       - name: "Test Simulation Python"
         shell: pwsh
         run: >

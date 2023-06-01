@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 
 """Setup this SWIG library."""
-import argparse
 import runpy
+import sys
 
 from setuptools import Distribution, Extension, find_packages, setup
 from setuptools.command.build_py import build_py
@@ -90,13 +90,7 @@ def get_package_wheel_name() -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser("Builder helper")
-    parser.add_argument(
-        "-n", "--name", help="Get the right wheel filename", action="store_true"
-    )
-    args = parser.parse_args()
-
-    if args.name:
+    if len(sys.argv)==2 and sys.argv[-1] =='-n':
         print(get_package_wheel_name())
     else:
         setup(**setup_info)
@@ -104,4 +98,3 @@ def main():
 
 if __name__=='__main__':
     main()
-    

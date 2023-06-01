@@ -33,7 +33,7 @@ jobs:
         run: |
           source .venv/bin/activate
           python setup.py bdist_wheel
-          twine -u __token__ -p "$PYPI_TOKEN" upload dist/*
+          twine upload -u __token__ -p "$PYPI_TOKEN" dist/*
           mv dist/*.whl .
           echo "WHL_NAME=$(ls *.whl)" >> $GITHUB_ENV
       - name: "Upload python wheel"
@@ -84,7 +84,7 @@ jobs:
         run: >
           ./venv/Scripts/activate.ps1 &&
           python setup.py bdist_wheel
-          twine -u __token__ -p "$PYPI_TOKEN" upload dist/${{ env.WHL_NAME }}
+          twine upload -u __token__ -p "$PYPI_TOKEN" dist/${{ env.WHL_NAME }}
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:

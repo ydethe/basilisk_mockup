@@ -26,13 +26,14 @@ jobs:
       - name: "Create virtual Environment"
         run: python3 -m venv .venv
       - name: "Install python packages"
-        run: source .venv/bin/activate && pip3 install wheel setuptools
+        run: source .venv/bin/activate && pip3 install wheel setuptools twine
       - name: "Build package"
         run: |
           source .venv/bin/activate
           python setup.py bdist_wheel
           mv dist/*.whl .
           echo "WHL_NAME=$(ls *.whl)" >> $GITHUB_ENV
+          twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:
@@ -67,7 +68,7 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          pip3 install wheel setuptools &&
+          pip3 install wheel setuptools twine &&
           python setup.py -n > wheel_name.txt
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
@@ -79,6 +80,7 @@ jobs:
         run: >
           ./venv/Scripts/activate.ps1 &&
           python setup.py bdist_wheel
+          twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:

@@ -46,7 +46,8 @@ jobs:
         path: dist/*.tar.gz
 
   upload_all:
-    needs: [build_wheels, make_sdist]
+    needs: [make_sdist]
+    # needs: [build_wheels, make_sdist]
     runs-on: ubuntu-latest
     environment: "PyPI deployement"
     # if: github.event_name == 'release' && github.event.action == 'published'

@@ -1,8 +1,0 @@
-README.md
-setup.py
-dist3/Basilisk/__init__.py
-dist3/Basilisk_Sim.egg-info/PKG-INFO
-dist3/Basilisk_Sim.egg-info/SOURCES.txt
-dist3/Basilisk_Sim.egg-info/dependency_links.txt
-dist3/Basilisk_Sim.egg-info/requires.txt
-dist3/Basilisk_Sim.egg-info/top_level.txt

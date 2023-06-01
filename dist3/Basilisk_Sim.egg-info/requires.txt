@@ -1,2 +1,0 @@
-[:python_version < "3.8"]
-importlib-metadata>=6.6.0

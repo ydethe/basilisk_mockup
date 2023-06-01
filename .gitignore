@@ -4,7 +4,6 @@
 ### C ###
 # Prerequisites
 *.d
-*_wrap.c*
 
 # Object files
 *.o
@@ -173,7 +172,7 @@ tags
 
 # End of https://www.gitignore.io/api/python,c,vim
 
-src/example/example_wrap.c
-src/example/example.py
-src/example/stl_example.py
-src/example/stl_example_wrap.cpp
+src/swig_example_demo/example_wrap.c
+src/swig_example_demo/example.py
+src/swig_example_demo/stl_example.py
+src/swig_example_demo/stl_example_wrap.cpp

@@ -9,22 +9,22 @@ from setuptools import Distribution, Extension, find_packages, setup
 from setuptools.command.build_py import build_py
 
 EXAMPLE_EXT = Extension(
-    name="_example",
+    name="swig_example_demo._example",
     sources=[
-        "src/example/example.c",
-        "src/example/example.i",
+        "src/swig_example_demo/example.c",
+        "src/swig_example_demo/example.i",
     ],
 )
 
 STD_EXT = Extension(
-    name="_stl_example",
+    name="swig_example_demo._stl_example",
     swig_opts=["-c++"],
     sources=[
-        "src/example/stl_example.cpp",
-        "src/example/stl_example.i",
+        "src/swig_example_demo/stl_example.cpp",
+        "src/swig_example_demo/stl_example.i",
     ],
     include_dirs=[
-        "src/example",
+        "src/swig_example_demo",
     ],
     extra_compile_args=[  # The g++ (4.8) in Travis needs this
         "-std=c++11",
@@ -40,7 +40,7 @@ class BuildPy(build_py):
         super(build_py, self).run()
 
 
-INFO = runpy.run_path("src/example/_meta.py")
+INFO = runpy.run_path("src/swig_example_demo/_meta.py")
 
 setup_info=dict(
     name="swig-example-demo",

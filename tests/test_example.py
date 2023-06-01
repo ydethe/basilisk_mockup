@@ -1,6 +1,6 @@
 import time
 
-import example
+from swig_example_demo import example
 
 
 def test_my_variable():

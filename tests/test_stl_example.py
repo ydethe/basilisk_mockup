@@ -1,4 +1,4 @@
-import example
+from swig_example_demo import stl_example as example
 
 
 def test_echo():

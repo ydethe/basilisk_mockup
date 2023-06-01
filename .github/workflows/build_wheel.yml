@@ -29,12 +29,11 @@ jobs:
         run: source .venv/bin/activate && pip3 install wheel setuptools twine
       - name: "Build package"
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           source .venv/bin/activate
           python setup.py bdist_wheel
-          twine upload dist/*
+          twine -u __token__ -p "$PYPI_TOKEN" upload dist/*
           mv dist/*.whl .
           echo "WHL_NAME=$(ls *.whl)" >> $GITHUB_ENV
       - name: "Upload python wheel"
@@ -81,12 +80,11 @@ jobs:
       - name: "Build basilisk"
         shell: pwsh
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: >
           ./venv/Scripts/activate.ps1 &&
           python setup.py bdist_wheel
-          twine upload dist/${{ env.WHL_NAME }}
+          twine -u __token__ -p "$PYPI_TOKEN" upload dist/${{ env.WHL_NAME }}
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:

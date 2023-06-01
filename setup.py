@@ -2,9 +2,10 @@
 # -*- coding:utf-8 -*-
 
 """Setup this SWIG library."""
+import argparse
 import runpy
 
-from setuptools import Extension, find_packages, setup
+from setuptools import Distribution, Extension, find_packages, setup
 from setuptools.command.build_py import build_py
 
 EXAMPLE_EXT = Extension(
@@ -41,7 +42,7 @@ class BuildPy(build_py):
 
 INFO = runpy.run_path("src/example/_meta.py")
 
-setup(
+setup_info=dict(
     name="swig-example-demo",
     description="A Python demo for SWIG",
     version=INFO["__version__"],
@@ -63,3 +64,44 @@ setup(
         "pytest-flake8",
     ],
 )
+
+def get_package_wheel_name() -> str:
+    """Get the right wheel name for Basilisk
+    Example: Basilisk_Sim-2.2.0b0-cp310-cp310-linux_x86_64.whl
+
+    From https://stackoverflow.com/a/60773383
+
+    Returns:
+        The wheel name
+
+    """
+    # create a fake distribution from arguments
+    dist = Distribution(attrs=setup_info)
+
+    # finalize bdist_wheel command
+    bdist_wheel_cmd = dist.get_command_obj("bdist_wheel")
+    bdist_wheel_cmd.ensure_finalized()
+
+    # assemble wheel file name
+    distname = bdist_wheel_cmd.wheel_dist_name
+    tag = "-".join(bdist_wheel_cmd.get_tag())
+
+    return f"{distname}-{tag}.whl"
+
+
+def main():
+    parser = argparse.ArgumentParser("Builder helper")
+    parser.add_argument(
+        "-n", "--name", help="Get the right wheel filename", action="store_true"
+    )
+    args = parser.parse_args()
+
+    if args.name:
+        print(get_package_wheel_name())
+    else:
+        setup(**setup_info)
+
+
+if __name__=='__main__':
+    main()
+    

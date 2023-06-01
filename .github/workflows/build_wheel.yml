@@ -44,27 +44,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.7","3.8","3.9","3.10","3.11"]
+        python-version: ["3.8"]
         os: [windows-2019]
     permissions:
       actions: read
       contents: read
       security-events: write
-    env:
-      MPLBACKEND: agg
     steps:
       - name: Checkout code
-        uses: nschloe/action-checkout-with-lfs-cache@v1
+        uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-          cache-dependency-path: '**/bskPkgRequired.txt'
-      - name: Choco help
-        uses: crazy-max/ghaction-chocolatey@v2
-        with:
-          args: -h
       - name: "Install swig and cmake"
         shell: pwsh
         run: choco install swig cmake -y
@@ -75,8 +67,8 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          pip3 install wheel pytest setuptools &&
-          python build_wheel.py -n > wheel_name.txt
+          pip3 install wheel setuptools &&
+          python setup.py -n > wheel_name.txt
       - name: "Add basilisk and cmake path to env path"
         shell: pwsh
         run: |
@@ -86,8 +78,7 @@ jobs:
         shell: pwsh
         run: >
           ./venv/Scripts/activate.ps1 &&
-          python conanfile.py &&
-          python build_wheel.py
+          python setup.py bdist_wheel
       - name: "Upload python wheel"
         uses: actions/upload-artifact@v3
         with:
